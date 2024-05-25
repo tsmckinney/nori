@@ -33,6 +33,13 @@ FrameBuffer::FrameBuffer() {
   glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
 }
 
+FrameBuffer::~FrameBuffer()
+{
+    glDeleteTextures(1, &texId);
+    glDeleteRenderbuffersEXT(1, &renderBuf);
+    glDeleteFramebuffersEXT(1, &fbo);
+}
+
 void FrameBuffer::Use() {
   glBindTexture(GL_TEXTURE_2D, texId);
 }

@@ -63,16 +63,19 @@ void Collider::DebugDraw(const Camera& cam, const Matrix4& objMat) {
     v4.x,v4.y,v4.z,v4.w
   };
   unsigned int VBO;
-  glGenBuffers(4, &VBO);
+  glGenBuffers(1, &VBO);
   glBindBuffer(GL_ARRAY_BUFFER, VBO);
   glBufferData(GL_ARRAY_BUFFER, sizeof(verts), verts, GL_DYNAMIC_DRAW);
   glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
   glEnableVertexAttribArray(0);
   unsigned int VAO;
-  glGenVertexArrays(2, &VAO);
+  glGenVertexArrays(1, &VAO);
   glBindVertexArray(VAO);
   glDrawArrays(GL_LINE_LOOP, 0, 4);
   glDepthFunc(GL_LESS);
+  glBindVertexArray(0);
+  glDeleteBuffers(1, &VBO);
+  glDeleteVertexArrays(1, &VAO);
 }
 
 void Collider::CreateSorted(const Vector3& da, const Vector3& c, const Vector3& db) {

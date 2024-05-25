@@ -67,7 +67,8 @@ int Engine::Run() {
       while (SDL_PollEvent(&event))
       {
           if (event.type == SDL_EVENT_QUIT) {
-              SDL_Quit();
+              DestroyGLObjects();
+              return 0;
           }
           else if (event.type == SDL_EVENT_KEY_DOWN)
           {
@@ -80,6 +81,11 @@ int Engine::Run() {
               {
                   input.key_press[event.key.keysym.sym] = true;
                   input.key[event.key.keysym.sym] = true;
+              }
+              else if (event.key.keysym.sym == SDLK_ESCAPE)
+              {
+                  DestroyGLObjects();
+                  return 0;
               }
               else if (event.key.keysym.sym == SDLK_RETURN && event.key.keysym.mod == SDL_KMOD_LALT) {
                   ToggleFullscreen();
@@ -96,7 +102,7 @@ int Engine::Run() {
               }
           }
           else if (event.type == SDL_EVENT_MOUSE_MOTION || event.type == SDL_EVENT_MOUSE_BUTTON_DOWN || event.type == SDL_EVENT_MOUSE_BUTTON_UP) {
-              input.UpdateRaw(event.button.button, event.motion.x, event.motion.y);
+              input.UpdateRaw(event.button.button, event.motion.xrel, event.motion.yrel);
           }
       }
     //Confine the cursor
@@ -289,7 +295,7 @@ void Engine::Render(const Camera& cam, GLuint curFBO, const Portal* skipPortal) 
 }
 
 void Engine::CreateGLWindow() {
-    SDL_Init(SDL_INIT_AUDIO || SDL_INIT_CAMERA || SDL_INIT_EVENTS || SDL_INIT_GAMEPAD || SDL_INIT_HAPTIC || SDL_INIT_JOYSTICK || SDL_INIT_SENSOR || SDL_INIT_TIMER || SDL_INIT_VIDEO);
+    SDL_Init(SDL_INIT_EVENTS && SDL_INIT_AUDIO && SDL_INIT_CAMERA && SDL_INIT_GAMEPAD && SDL_INIT_HAPTIC && SDL_INIT_JOYSTICK && SDL_INIT_SENSOR && SDL_INIT_TIMER && SDL_INIT_VIDEO);
 
   //Always start in windowed mode
   iWidth = GH_SCREEN_WIDTH;
@@ -312,6 +318,9 @@ void Engine::CreateGLWindow() {
 
   if (GH_START_FULLSCREEN) {
     ToggleFullscreen();
+  }
+  if (GH_HIDE_MOUSE) {
+      ConfineCursor();
   }
 }
 
@@ -350,6 +359,12 @@ float Engine::NearestPortalDist() const {
     dist = GH_MIN(dist, vPortals[i]->DistTo(player->pos));
   }
   return dist;
+}
+
+void Engine::ConfineCursor()
+{
+    SDL_SetRelativeMouseMode(true);
+    SDL_SetWindowMouseGrab(window, true);
 }
 
 void Engine::ToggleFullscreen() {
