@@ -1,6 +1,6 @@
 #include "Camera.h"
 #include "GameHeader.h"
-#include <GL/glew.h>
+#include <glad/gl.h>
 #include <cmath>
 
 Camera::Camera() :

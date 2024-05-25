@@ -6,4 +6,5 @@ Debug/
 Release/
 Floorplan/
 Thumbs.db
-glew-2.1.0
+SDL3/
+glad2/

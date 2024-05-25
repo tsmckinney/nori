@@ -8,8 +8,8 @@
 #include "Timer.h"
 #include "Scene.h"
 #include "Sky.h"
-#include <GL/glew.h>
-#include <windows.h>
+#include <glad/gl.h>
+#include <SDL3/SDL.h>
 #include <memory>
 #include <vector>
 
@@ -23,8 +23,6 @@ public:
   void Render(const Camera& cam, GLuint curFBO, const Portal* skipPortal);
   void LoadScene(int ix);
 
-  LRESULT WindowProc(HWND hCurWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
-
   const Player& GetPlayer() const { return *player; }
   float NearestPortalDist() const;
 
@@ -36,13 +34,11 @@ private:
   void ConfineCursor();
   void ToggleFullscreen();
 
-  HDC   hDC;           // device context
-  HGLRC hRC;				   // opengl context
-  HWND  hWnd;				   // window
-  HINSTANCE hInstance; // process id
+  SDL_Window* window;
+  SDL_GLContext context;
 
-  LONG iWidth;         // window width
-  LONG iHeight;        // window height
+  int iWidth;         // window width
+  int iHeight;        // window height
   bool isFullscreen;   // fullscreen state
 
   Camera main_cam;

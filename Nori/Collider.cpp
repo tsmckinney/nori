@@ -1,6 +1,6 @@
 #include "Collider.h"
 #include "GameHeader.h"
-#include "GL/glew.h"
+#include "glad/gl.h"
 #include <cassert>
 #include <iostream>
 
@@ -47,22 +47,31 @@ bool Collider::Collide(const Matrix4& localToUnit, Vector3& delta) const {
 void Collider::DebugDraw(const Camera& cam, const Matrix4& objMat) {
   glDepthFunc(GL_ALWAYS);
   glUseProgram(0);
-  glBegin(GL_LINE_LOOP);
-  glColor3f(0.0f, 1.0f, 0.0f);
+  //glColor3f(0.0f, 1.0f, 0.0f);
 
   const Matrix4 m = cam.Matrix() * objMat * mat;
-  Vector4 v;
+  Vector4 v1,v2,v3,v4;
 
-  v = m * Vector4(1, 1, 0, 1);
-  glVertex4f(v.x, v.y, v.z, v.w);
-  v = m * Vector4(1, -1, 0, 1);
-  glVertex4f(v.x, v.y, v.z, v.w);
-  v = m * Vector4(-1, -1, 0, 1);
-  glVertex4f(v.x, v.y, v.z, v.w);
-  v = m * Vector4(-1, 1, 0, 1);
-  glVertex4f(v.x, v.y, v.z, v.w);
-
-  glEnd();
+  v1 = m * Vector4(1, 1, 0, 1);
+  v2 = m * Vector4(1, -1, 0, 1);
+  v3 = m * Vector4(-1, -1, 0, 1);
+  v4 = m * Vector4(-1, 1, 0, 1);
+  GLfloat verts[] = {
+    v1.x,v1.y,v1.z,v1.w,
+    v2.x,v2.y,v2.z,v2.w,
+    v3.x,v3.y,v3.z,v3.w,
+    v4.x,v4.y,v4.z,v4.w
+  };
+  unsigned int VBO;
+  glGenBuffers(4, &VBO);
+  glBindBuffer(GL_ARRAY_BUFFER, VBO);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(verts), verts, GL_DYNAMIC_DRAW);
+  glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
+  glEnableVertexAttribArray(0);
+  unsigned int VAO;
+  glGenVertexArrays(2, &VAO);
+  glBindVertexArray(VAO);
+  glDrawArrays(GL_LINE_LOOP, 0, 4);
   glDepthFunc(GL_LESS);
 }
 
