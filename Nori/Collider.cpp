@@ -57,25 +57,21 @@ void Collider::DebugDraw(const Camera& cam, const Matrix4& objMat) {
   v3 = m * Vector4(-1, -1, 0, 1);
   v4 = m * Vector4(-1, 1, 0, 1);
   GLfloat verts[] = {
-    v1.x,v1.y,v1.z,v1.w,
-    v2.x,v2.y,v2.z,v2.w,
-    v3.x,v3.y,v3.z,v3.w,
-    v4.x,v4.y,v4.z,v4.w
+    v1.x,v1.y,v1.z,
+    v2.x,v2.y,v2.z,
+    v3.x,v3.y,v3.z,
+    v4.x,v4.y,v4.z,
   };
-  unsigned int VBO;
-  glGenBuffers(1, &VBO);
-  glBindBuffer(GL_ARRAY_BUFFER, VBO);
-  glBufferData(GL_ARRAY_BUFFER, sizeof(verts), verts, GL_DYNAMIC_DRAW);
-  glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)0);
+  unsigned int debugVBO;
+  glGenBuffers(1, &debugVBO);
+  glBindBuffer(GL_ARRAY_BUFFER, debugVBO);
+  glBufferData(GL_ARRAY_BUFFER, 12 * sizeof(GLfloat), verts, GL_DYNAMIC_DRAW);
+  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), 0);
   glEnableVertexAttribArray(0);
-  unsigned int VAO;
-  glGenVertexArrays(1, &VAO);
-  glBindVertexArray(VAO);
-  glDrawArrays(GL_LINE_LOOP, 0, 4);
+  glDrawArrays(GL_LINES, 0, 4);
   glDepthFunc(GL_LESS);
-  glBindVertexArray(0);
-  glDeleteBuffers(1, &VBO);
-  glDeleteVertexArrays(1, &VAO);
+  glDeleteBuffers(1, &debugVBO);
+  
 }
 
 void Collider::CreateSorted(const Vector3& da, const Vector3& c, const Vector3& db) {
