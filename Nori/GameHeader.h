@@ -4,8 +4,7 @@
 #pragma warning(disable : 4099) // Missing PDB file
 
 //Windows
-static const char GH_TITLE[] = "NonEuclideanDemo";
-static const char GH_CLASS[] = "NED";
+static const char GH_TITLE[] = "Nori";
 
 //General
 static const float GH_PI = 3.141592653589793f;

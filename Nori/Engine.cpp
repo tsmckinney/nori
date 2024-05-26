@@ -87,7 +87,7 @@ int Engine::Run() {
                   DestroyGLObjects();
                   return 0;
               }
-              else if (event.key.keysym.sym == SDLK_RETURN && event.key.keysym.mod == SDL_KMOD_LALT) {
+              else if (event.key.keysym.sym == SDLK_RETURN && (event.key.keysym.mod & SDL_KMOD_LALT)) {
                   ToggleFullscreen();
               }
           }
@@ -371,8 +371,18 @@ void Engine::ToggleFullscreen() {
   isFullscreen = !isFullscreen;
   if (isFullscreen) {
       SDL_SetWindowFullscreen(window, true);
+      SDL_DisplayID display_id = SDL_GetPrimaryDisplay();
+      const SDL_DisplayMode* display_mode = SDL_GetDesktopDisplayMode(display_id);
+      iWidth = display_mode->w;
+      iHeight = display_mode->h;
+      SDL_SetWindowSize(window, iWidth, iHeight);
+      glViewport(0, 0, iWidth, iHeight);
 
   } else {
       SDL_SetWindowFullscreen(window, false);
+      iWidth = GH_SCREEN_WIDTH;
+      iHeight = GH_SCREEN_HEIGHT;
+      SDL_SetWindowSize(window, iWidth, iHeight);
+      glViewport(0, 0, iWidth, iHeight);
   }
 }
