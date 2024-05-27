@@ -62,15 +62,19 @@ void Collider::DebugDraw(const Camera& cam, const Matrix4& objMat) {
     v3.x,v3.y,v3.z,v3.w,
     v4.x,v4.y,v4.z,v4.w
   };
-  unsigned int debugVBO;
+  GLuint debugVBO, debugVAO;
+  glGenVertexArrays(1, &debugVAO);
+  glBindVertexArray(debugVAO);
   glGenBuffers(1, &debugVBO);
   glBindBuffer(GL_ARRAY_BUFFER, debugVBO);
-  glBufferData(GL_ARRAY_BUFFER, 16 * sizeof(GLfloat), verts, GL_DYNAMIC_DRAW);
-  glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), 0);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(verts), verts, GL_DYNAMIC_DRAW);
+  glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 0, (void*)0);
   glEnableVertexAttribArray(0);
   glDrawArrays(GL_LINE_LOOP, 0, 4);
   glDepthFunc(GL_LESS);
   glDeleteBuffers(1, &debugVBO);
+  glDisableVertexAttribArray(0);
+  glDeleteVertexArrays(1, &debugVAO);
   
 }
 
