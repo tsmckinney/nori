@@ -1,6 +1,6 @@
 # Nori
-A NonEuclidean game engine for Windows, written in C++ OpenGL.
-To see what this code is about, check out this video:
+A NonEuclidean game engine written in C++ OpenGL.
+To see what the original project was about, check out this video:
 https://youtu.be/kEB11PQ9Eo8
 
 ## Source Code Dependencies
@@ -15,3 +15,5 @@ Add SDL3 and glad2 to the main directory (make sure you use the Core profile, ot
 
 ## Thanks
 - To CodeParade for starting this project
+- To Srinivasa314 and CzechBlueBear for coming up with the idea of porting the project to SDL
+- To several OpenGL tutorials for helping me port the debug drawing to modern OpenGL
