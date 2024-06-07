@@ -1,7 +1,7 @@
 #pragma once
-#include "Object.h"
-#include "Resources.h"
-#include "Portal.h"
+#include "../Object.h"
+#include "../Resources.h"
+#include "../GameObjects/Portal.h"
 
 class Floorplan : public Object {
 public:
