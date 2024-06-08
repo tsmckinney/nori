@@ -77,6 +77,19 @@ void Level2::Load(PObjectVec& objs, PPortalVec& portals, Player& player) {
     Portal::Connect(portal2->front, portal3->back);
     Portal::Connect(portal3->front, portal1->back);
   }
+ else if (num_rooms == 8) {
+     std::shared_ptr<Portal> portal1(new Portal());
+     house1->SetDoor4(*portal1);
+     portals.push_back(portal1);
+
+     std::shared_ptr<Portal> portal2(new Portal());
+     house2->SetDoor4(*portal2);
+     portals.push_back(portal2);
+
+
+     Portal::Connect(portal1->front, portal2->back);
+     Portal::Connect(portal2->front, portal1->back);
+  }
 
   player.SetPosition(Vector3(3, GH_PLAYER_HEIGHT, 3));
 }

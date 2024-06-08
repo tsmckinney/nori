@@ -31,7 +31,7 @@ Engine::Engine() : window(NULL), context(NULL) {
 
   vScenes.push_back(std::shared_ptr<Scene>(new Level1));
   vScenes.push_back(std::shared_ptr<Scene>(new Level2(3)));
-  vScenes.push_back(std::shared_ptr<Scene>(new Level2(6)));
+  vScenes.push_back(std::shared_ptr<Scene>(new Level2(8)));
   vScenes.push_back(std::shared_ptr<Scene>(new Level3));
   vScenes.push_back(std::shared_ptr<Scene>(new Level4));
   vScenes.push_back(std::shared_ptr<Scene>(new Level5));
@@ -77,11 +77,6 @@ int Engine::Run() {
                   input.key_press[toupper(event.key.keysym.sym)] = true;
                   input.key[toupper(event.key.keysym.sym)] = true;
               }
-              else if (event.key.keysym.sym >= '0' && event.key.keysym.sym <= '9')
-              {
-                  input.key_press[event.key.keysym.sym] = true;
-                  input.key[event.key.keysym.sym] = true;
-              }
               else if (event.key.keysym.sym == SDLK_ESCAPE)
               {
                   DestroyGLObjects();
@@ -90,13 +85,18 @@ int Engine::Run() {
               else if (event.key.keysym.sym == SDLK_RETURN && (event.key.keysym.mod & SDL_KMOD_LALT)) {
                   ToggleFullscreen();
               }
+              else if (event.key.keysym.sym != SDLK_UNKNOWN)
+              {
+                  input.key_press[event.key.keysym.sym] = true;
+                  input.key[event.key.keysym.sym] = true;
+              }
           }
           else if (event.type == SDL_EVENT_KEY_UP) {
               if (event.key.keysym.sym >= 'a' && event.key.keysym.sym <= 'z')
               {
                   input.key[toupper(event.key.keysym.sym)] = false;
               }
-              else if (event.key.keysym.sym >= '0' && event.key.keysym.sym <= '9')
+              else  if (event.key.keysym.sym != SDLK_UNKNOWN)
               {
                   input.key[event.key.keysym.sym] = false;
               }

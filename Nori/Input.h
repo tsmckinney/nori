@@ -9,8 +9,8 @@ public:
   void UpdateRaw(unsigned int state, float x, float y);
 
   //Keyboard
-  bool key[256];
-  bool key_press[256];
+  bool key[2048];
+  bool key_press[2048];
 
   //Mouse
   bool mouse_button[3];
