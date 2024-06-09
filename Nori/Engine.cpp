@@ -10,6 +10,9 @@
 #include <cmath>
 #include <iostream>
 #include <algorithm>
+#include <imgui.h>
+#include <imgui_impl_sdl3.h>
+#include <imgui_impl_opengl3.h>
 
 Engine* GH_ENGINE = nullptr;
 Player* GH_PLAYER = nullptr;
@@ -43,6 +46,9 @@ Engine::Engine() : window(NULL), context(NULL) {
 }
 
 Engine::~Engine() {
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplSDL3_Shutdown();
+    ImGui::DestroyContext();
   SDL_GL_MakeCurrent(NULL, NULL);
 
   SDL_GL_DeleteContext(context);
@@ -86,6 +92,10 @@ int Engine::Run() {
               else if (event.key.keysym.sym == SDLK_RETURN && (event.key.keysym.mod & SDL_KMOD_LALT)) {
                   ToggleFullscreen();
               }
+              else if (event.key.keysym.sym == SDLK_RETURN && (event.key.keysym.mod & SDL_KMOD_RALT)) {
+                  GH_HIDE_MOUSE = !GH_HIDE_MOUSE;
+                  ConfineCursor();
+              }
               else if (event.key.keysym.sym != SDLK_UNKNOWN && event.key.keysym.sym <= 2048)
               {
                   input.key_press[event.key.keysym.sym] = true;
@@ -103,7 +113,24 @@ int Engine::Run() {
               }
           }
           else if (event.type == SDL_EVENT_MOUSE_MOTION || event.type == SDL_EVENT_MOUSE_BUTTON_DOWN || event.type == SDL_EVENT_MOUSE_BUTTON_UP) {
-              input.UpdateRaw(event.button.button, event.motion.xrel, event.motion.yrel);
+              if (GH_HIDE_MOUSE) {
+                  input.UpdateRaw(event.button.button, event.motion.xrel, event.motion.yrel);
+              }
+              else {
+                  input.mouse_dx = 0;
+                  input.mouse_dy = 0;
+                  input.mouse_ddx += 0;
+                  input.mouse_ddy += 0;
+                  input.mouse_button[0] = false;
+                  input.mouse_button_press[0] = false;
+                  input.mouse_button[1] = false;
+                  input.mouse_button_press[1] = false;
+                  input.mouse_button[2] = false;
+                  input.mouse_button_press[2] = false;
+              }
+          }
+          if (!GH_HIDE_MOUSE) {
+              ImGui_ImplSDL3_ProcessEvent(&event);
           }
       }
     //Confine the cursor
@@ -128,7 +155,7 @@ int Engine::Run() {
     }
     else if (input.key_press['7']) {
         LoadScene(6);
-    }
+    }   
 
     //Used fixed time steps for updates
     const int64_t new_ticks = timer.GetTicks();
@@ -149,6 +176,15 @@ int Engine::Run() {
     //Render scene
     GH_REC_LEVEL = GH_MAX_RECURSION;
     Render(main_cam, 0, nullptr);
+
+    if (GH_HIDE_MOUSE == false) {
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplSDL3_NewFrame();
+        ImGui::NewFrame();
+        ImGui::ShowDemoWindow();
+        ImGui::Render();
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+    }
     SDL_GL_SwapWindow(window);
   }
 
@@ -323,6 +359,14 @@ void Engine::CreateGLWindow() {
   if (GH_HIDE_MOUSE) {
       ConfineCursor();
   }
+  IMGUI_CHECKVERSION();
+  ImGui::CreateContext();
+  ImGuiIO& io = ImGui::GetIO(); 
+  io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+  io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
+  io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+  ImGui_ImplSDL3_InitForOpenGL(window, context);
+  ImGui_ImplOpenGL3_Init();
 }
 
 void Engine::InitGLObjects() {
@@ -364,8 +408,8 @@ float Engine::NearestPortalDist() const {
 
 void Engine::ConfineCursor()
 {
-    SDL_SetRelativeMouseMode(true);
-    SDL_SetWindowMouseGrab(window, true);
+    SDL_SetRelativeMouseMode(GH_HIDE_MOUSE);
+    SDL_SetWindowMouseGrab(window, GH_HIDE_MOUSE);
 }
 
 void Engine::ToggleFullscreen() {

@@ -17,10 +17,19 @@ void Input::EndFrame() {
 }
 
 void Input::UpdateRaw(unsigned int state, float x, float y) {
-    mouse_dx = x;
-    mouse_dy = y;
-    mouse_ddx += mouse_dx;
-    mouse_ddy += mouse_dy;
+    if (GH_HIDE_MOUSE)
+    {
+        mouse_dx = x;
+        mouse_dy = y;
+        mouse_ddx += mouse_dx;
+        mouse_ddy += mouse_dy;
+    }
+    else {
+        mouse_dx = 0;
+        mouse_dy = 0;
+        mouse_ddx += 0;
+        mouse_ddy += 0;
+    }
     if (state == SDL_BUTTON_LEFT)
     {
         mouse_button[0] = true;

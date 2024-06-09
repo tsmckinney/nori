@@ -4,7 +4,7 @@ To see what the original project was about, check out this video:
 https://youtu.be/kEB11PQ9Eo8
 
 ## Source Code Dependencies
-Add SDL3 and glad2 to the main directory (make sure you use the Core profile, otherwise it may not work!), naming them approporately.  Once you build the project, add SDL3.dll to the build.
+Add SDL3, glad2(make sure you use the Core profile, otherwise it may not work!), and imgui (docking branch, latest version), to the main directory, naming them approporately.  Once you build the project, add SDL3.dll to the build.
 
 ## Controls
 * **Mouse** - Look around
@@ -12,6 +12,9 @@ Add SDL3 and glad2 to the main directory (make sure you use the Core profile, ot
 * **1 - 7** - Switch between different demo rooms
 * **Alt + Enter** - Toggle Fullscreen
 * **Esc** - Exit demo
+
+## Important note:
+There is a bug where if you use a mouse button when ImGui isn't active, the camera starts spinning. I'm trying to fix this up, but in the meantime, resetting the scene may fix the problem.
 
 ## Thanks
 - To CodeParade for starting this project

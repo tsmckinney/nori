@@ -70,20 +70,22 @@ void Player::Update() {
 
 void Player::Look(float mouseDx, float mouseDy) {
   //Adjust x-axis rotation
-  cam_rx -= mouseDy * GH_MOUSE_SENSITIVITY;
-  if (cam_rx > GH_PI / 2) {
-    cam_rx = GH_PI / 2;
-  } else if (cam_rx < -GH_PI / 2) {
-    cam_rx = -GH_PI / 2;
-  }
+    cam_rx -= mouseDy * GH_MOUSE_SENSITIVITY;
+    if (cam_rx > GH_PI / 2) {
+        cam_rx = GH_PI / 2;
+    }
+    else if (cam_rx < -GH_PI / 2) {
+       cam_rx = -GH_PI / 2;
+    }
 
-  //Adjust y-axis rotation
-  cam_ry -= mouseDx * GH_MOUSE_SENSITIVITY;
-  if (cam_ry > GH_PI) {
-    cam_ry -= GH_PI * 2;
-  } else if (cam_ry < -GH_PI) {
-    cam_ry += GH_PI * 2;
-  }
+    //Adjust y-axis rotation
+    cam_ry -= mouseDx * GH_MOUSE_SENSITIVITY;
+    if (cam_ry > GH_PI) {
+        cam_ry -= GH_PI * 2;
+    }
+    else if (cam_ry < -GH_PI) {
+        cam_ry += GH_PI * 2;
+    }
 }
 
 void Player::Move(float moveF, float moveL) {
