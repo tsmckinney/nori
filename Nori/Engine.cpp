@@ -44,6 +44,7 @@ Engine::Engine() : window(NULL), context(NULL) {
 
 Engine::~Engine() {
   SDL_GL_MakeCurrent(NULL, NULL);
+
   SDL_GL_DeleteContext(context);
   SDL_DestroyWindow(window);
   SDL_Quit();
@@ -85,7 +86,7 @@ int Engine::Run() {
               else if (event.key.keysym.sym == SDLK_RETURN && (event.key.keysym.mod & SDL_KMOD_LALT)) {
                   ToggleFullscreen();
               }
-              else if (event.key.keysym.sym != SDLK_UNKNOWN)
+              else if (event.key.keysym.sym != SDLK_UNKNOWN && event.key.keysym.sym <= 2048)
               {
                   input.key_press[event.key.keysym.sym] = true;
                   input.key[event.key.keysym.sym] = true;
@@ -96,7 +97,7 @@ int Engine::Run() {
               {
                   input.key[toupper(event.key.keysym.sym)] = false;
               }
-              else  if (event.key.keysym.sym != SDLK_UNKNOWN)
+              else  if (event.key.keysym.sym != SDLK_UNKNOWN && event.key.keysym.sym <= 2048)
               {
                   input.key[event.key.keysym.sym] = false;
               }
