@@ -14,7 +14,7 @@ Add SDL3, glad2(make sure you use the Core profile, otherwise it may not work!),
 * **Esc** - Exit demo
 
 ## Important note:
-There is a bug where if you use a mouse button when ImGui isn't active, the camera starts spinning. I'm trying to fix this up, but in the meantime, resetting the scene may fix the problem.
+There is a bug where on some systems, if you use a mouse button when ImGui isn't active, the camera starts spinning. I'm trying to fix this up, but in the meantime, resetting the scene may fix the problem.
 
 ## Thanks
 - To CodeParade for starting this project

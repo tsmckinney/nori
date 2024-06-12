@@ -1,6 +1,6 @@
 #pragma once
 
-struct tagRAWINPUT;
+
 class Input {
 public:
   Input();

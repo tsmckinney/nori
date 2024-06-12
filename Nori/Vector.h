@@ -166,6 +166,41 @@ public:
   //Components
   float x, y, z, w;
 };
+class Vector2 {
+public:
+    Vector2() {}
+    explicit Vector2(float b) : x(b), y(b) {}
+    explicit Vector2(float x, float y) : x(x), y(y) {}
+    inline Vector2 operator+(float b) const {
+        return Vector2(x + b, y + b);
+    }
+    inline Vector2 operator-(float b) const {
+        return Vector2(x - b, y - b);
+    }
+    inline Vector2 operator*(float b) const {
+        return Vector2(x * b, y * b);
+    }
+    inline Vector2 operator/(float b) const {
+        return Vector2(x / b, y / b);
+    }
+    inline void operator+=(float b) {
+        x += b; y += b;
+    }
+    inline void operator-=(float b) {
+        x -= b; y -= b;
+    }
+    inline void operator*=(float b) {
+        x *= b; y *= b; 
+    }
+    inline void operator/=(float b) {
+        x /= b; y /= b;
+    }
+
+    inline float Dot(const Vector2& b) const { return x * b.x + y * b.y; }
+
+    //Components
+    float x, y;
+};
 
 class Matrix4 {
 public:

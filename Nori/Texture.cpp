@@ -1,6 +1,7 @@
 #include "Texture.h"
 #include <fstream>
 #include <cassert>
+#include "stb_image.h"
 
 Texture::Texture(const char* fname, int rows, int cols) {
   //Check if this is a 3D texture
