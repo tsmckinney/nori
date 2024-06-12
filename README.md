@@ -19,4 +19,4 @@ There is a bug where if you use a mouse button when ImGui isn't active, the came
 ## Thanks
 - To CodeParade for starting this project
 - To Srinivasa314 and CzechBlueBear for coming up with the idea of porting the project to SDL
-- To several OpenGL tutorials for helping me port the debug drawing to modern OpenGL
+- To several OpenGL tutorials for helping me port this project to modern OpenGL
