@@ -2,6 +2,7 @@
 #include "Resources.h"
 #include "Vector.h"
 
+
 class Sky {
 public:
   Sky() {

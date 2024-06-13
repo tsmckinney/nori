@@ -2,6 +2,7 @@
 #include "Camera.h"
 #include <glad/gl.h>
 
+
 //Forward declaration
 class Portal;
 

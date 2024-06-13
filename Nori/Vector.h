@@ -5,6 +5,7 @@
 #include <iostream>
 #include <cassert>
 
+
 class Vector3 {
 public:
   //Constructors

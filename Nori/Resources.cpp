@@ -1,6 +1,7 @@
 #include "Resources.h"
 #include <unordered_map>
 
+
 std::shared_ptr<Mesh> AquireMesh(const char* name) {
   static std::unordered_map<std::string, std::weak_ptr<Mesh>> map;
   std::weak_ptr<Mesh>& mesh = map[std::string(name)];

@@ -20,3 +20,4 @@ There is a bug where on some systems, if you use a mouse button when ImGui isn't
 - To CodeParade for starting this project
 - To Srinivasa314 and CzechBlueBear for coming up with the idea of porting the project to SDL
 - To several OpenGL tutorials for helping me port this project to modern OpenGL
+- To nothings for stb_image

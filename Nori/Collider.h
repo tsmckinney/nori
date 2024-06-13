@@ -2,6 +2,7 @@
 #include "Vector.h"
 #include "Camera.h"
 
+
 class Collider {
 public:
   Collider(const Vector3& a, const Vector3& b, const Vector3& c);

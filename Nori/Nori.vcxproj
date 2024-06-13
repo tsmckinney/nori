@@ -178,6 +178,7 @@
     <ClCompile Include="GameObjects/Portal.cpp" />
     <ClCompile Include="Resources.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="stb_image.cpp" />
     <ClCompile Include="Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -218,6 +219,7 @@
     <ClInclude Include="Sky.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="GameObjects/Statue.h" />
+    <ClInclude Include="stb_image.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Vector.h" />

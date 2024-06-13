@@ -2,6 +2,7 @@
 #include "Vector.h"
 #include <cassert>
 
+
 class Sphere {
 public:
   Sphere(float r=1.0f) : center(0.0f), radius(r) {}

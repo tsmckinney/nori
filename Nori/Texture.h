@@ -10,5 +10,5 @@ public:
 
 private:
   GLuint texId;
-  bool is3D;
+  bool isTextureArray;
 };
