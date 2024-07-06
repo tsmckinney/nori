@@ -1,6 +1,5 @@
 #pragma once
-#include "../Object.h"
-#include "../Resources.h"
+#include "NoriMain.h"
 
 class Ground : public Object {
 public:

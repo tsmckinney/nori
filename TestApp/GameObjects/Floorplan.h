@@ -1,7 +1,5 @@
 #pragma once
-#include "../Object.h"
-#include "../Resources.h"
-#include "../GameObjects/Portal.h"
+#include "NoriMain.h"
 
 class Floorplan : public Object {
 public:

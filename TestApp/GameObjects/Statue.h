@@ -1,6 +1,5 @@
 #pragma once
-#include "../Object.h"
-#include "../Resources.h"
+#include "NoriMain.h"
 
 class Statue : public Object {
 public:

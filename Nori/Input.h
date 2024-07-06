@@ -1,31 +1,32 @@
 #pragma once
 
+namespace nori {
+    class Input {
+    public:
+        Input();
 
-class Input {
-public:
-  Input();
+        void EndFrame();
+        void UpdateRaw(unsigned int state, float x, float y);
 
-  void EndFrame();
-  void UpdateRaw(unsigned int state, float x, float y);
+        //Keyboard
+        bool key[2048];
+        bool key_press[2048];
 
-  //Keyboard
-  bool key[2048];
-  bool key_press[2048];
+        //Mouse
+        bool mouse_button[3];
+        bool mouse_button_press[3];
+        float mouse_dx;
+        float mouse_dy;
+        float mouse_ddx;
+        float mouse_ddy;
 
-  //Mouse
-  bool mouse_button[3];
-  bool mouse_button_press[3];
-  float mouse_dx;
-  float mouse_dy;
-  float mouse_ddx;
-  float mouse_ddy;
+        //Joystick
+        //TODO:
 
-  //Joystick
-  //TODO:
+        //Bindings
+        //TODO:
 
-  //Bindings
-  //TODO:
-
-  //Calibration
-  //TODO:
+        //Calibration
+        //TODO:
+    };
 };

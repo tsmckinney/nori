@@ -1,5 +1,5 @@
 #pragma once
-#include "../Object.h"
+#include "NoriMain.h"
 
 class Tunnel : public Object {
 public:

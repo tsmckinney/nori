@@ -1,6 +1,5 @@
 #pragma once
-#include "../Object.h"
-#include "../Resources.h"
+#include "NoriMain.h"
 
 class PillarRoom : public Object {
 public:

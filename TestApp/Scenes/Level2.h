@@ -1,6 +1,6 @@
 #pragma once
-#include "../Scene.h"
-
+#include "NoriMain.h"
+using namespace nori;
 class Level2 : public Scene {
 public:
   Level2(int rooms) : num_rooms(rooms) {}
